@@ -1,0 +1,20 @@
+\documentclass{standalone}
+\usepackage{plots}
+
+\begin{document}
+\begin{tikzpicture}
+\begin{axis}[
+  width=\figsize,
+  height=\figsize,
+  myaxis,
+  legend style={at={(1,0.5)}, anchor=west},
+  xlabel={\# input literals},
+  % ylabel={\# generated clauses},
+]
+\addplot [rustsat] table [x={inputs},y={rustsat},col sep=comma] {../data/gte.csv};
+\addlegendimage {pysat}
+\addplot [openwbo] table [x={inputs},y={open-wbo},col sep=comma] {../data/gte.csv};
+% \legend {\rustsat,\pysat/\pblib,\openwbo}
+\end{axis}
+\end{tikzpicture}
+\end{document}

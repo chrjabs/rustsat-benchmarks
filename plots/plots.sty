@@ -1,0 +1,120 @@
+\ProvidesPackage{plots}
+
+\RequirePackage[a-3b,mathxmp]{pdfx}
+\RequirePackage{amsmath,amssymb}
+
+\RequirePackage{tikz}
+\usetikzlibrary{patterns,patterns.meta,calc}
+
+\RequirePackage{pgfplots}
+\usepgfplotslibrary{fillbetween,groupplots,colormaps}
+
+% ===== Measures =====
+\def\figsize{3.3cm}
+
+% ===== Colour Palettes =====
+% xfgs_normal6 colour palette
+\definecolor{color0}{RGB}{64,83,211}
+\definecolor{color1}{RGB}{221,179,16}
+\definecolor{color2}{RGB}{181,29,20}
+\definecolor{color3}{RGB}{0,190,255}
+\definecolor{color4}{RGB}{251,73,176}
+\definecolor{color5}{RGB}{0,178,93}
+\definecolor{color6}{RGB}{202,202,202}
+
+% xgfs_normal12 colour palette
+\definecolor{color0e}{RGB}{235,172,35}
+\definecolor{color1e}{RGB}{184,0,88}
+\definecolor{color2e}{RGB}{0,140,249}
+\definecolor{color3e}{RGB}{0,110,0}
+\definecolor{color4e}{RGB}{0,187,173}
+\definecolor{color5e}{RGB}{209,99,230}
+\definecolor{color6e}{RGB}{178,69,2}
+\definecolor{color7e}{RGB}{255,146,135}
+\definecolor{color8e}{RGB}{89,84,214}
+\definecolor{color9e}{RGB}{0,198,248}
+\definecolor{color10e}{RGB}{135,133,0}
+\definecolor{color11e}{RGB}{0,167,108}
+\definecolor{color12e}{RGB}{189,189,189}
+
+% viridis_4
+\definecolor{viridis1}{RGB}{253,231,37}
+\definecolor{viridis2}{RGB}{53,183,121}
+\definecolor{viridis3}{RGB}{49,104,142}
+\definecolor{viridis4}{RGB}{68,1,84}
+
+% ===== PGF log10 function =====
+\pgfmathdeclarefunction{lg10}{1}{%
+    \pgfmathparse{ln(#1)/ln(10)}%
+}
+
+% ===== Paper Macros =====
+\newcommand{\rustsat}{\textsc{RustSAT}}
+\newcommand{\pysat}{\textsc{PySAT}}
+\newcommand{\pblib}{\textsc{PbLib}}
+\newcommand{\openwbo}{\textsc{Open-WBO}}
+
+% ===== PGF Plots Presets =====
+\pgfplotsset{
+  compat=newest,
+  colormap name=viridis,
+  colormap/viridis high res,
+  myaxis/.style={
+    title style={font=\small},
+    label style={font=\small},
+    tick label style={
+      font=\small,
+      /pgf/number format/1000 sep={},
+    },
+    legend style={
+      font=\footnotesize,
+      fill opacity=0.8,
+      draw opacity=1,
+      text opacity=1
+    },
+    tick pos=left,
+    axis x line*=bottom,
+    axis y line*=left,
+    scale only axis,
+  },
+  mylineplot/.style={
+    semithick,
+  },
+  every non boxed x axis/.append style={
+    xtick align=inside,
+    x axis line style={-},
+  },
+  every non boxed y axis/.append style={
+    ytick align=inside,
+    y axis line style={-},
+  },
+  rustsat/.style={
+    mylineplot,
+    color0,
+    mark=square,
+  },
+  pysat/.style={
+    mylineplot,
+    color1,
+    mark=x,
+  },
+  openwbo/.style={
+    mylineplot,
+    color2,
+    mark=+,
+  },
+  cpp/.style={
+    mylineplot,
+    color2,
+    mark=+,
+  }
+}
+
+\newcommand{\liblegend}{
+  \addlegendimage{rustsat}
+  \addlegendentry{\rustsat}
+  \addlegendimage{pysat}
+  \addlegendentry{\pysat/\pblib}
+  \addlegendimage{openwbo}
+  \addlegendentry{\openwbo}
+}

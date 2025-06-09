@@ -1,0 +1,19 @@
+\documentclass{standalone}
+\usepackage{plots}
+
+\begin{document}
+\begin{tikzpicture}
+\begin{axis}[
+  width=\figsize,
+  height=\figsize,
+  myaxis,
+  legend style={at={(0.6,0.5)}, anchor=west},
+  xlabel={\# input literals},
+  % ylabel={\# generated clauses},
+]
+\addplot [rustsat] table [x={inputs},y={rustsat},col sep=comma] {../data/binary-adder.csv};
+\addplot [openwbo] table [x={inputs},y={open-wbo},col sep=comma] {../data/binary-adder.csv};
+\addplot [pysat] table [x={inputs},y={pysat},col sep=comma] {../data/binary-adder.csv};
+\end{axis}
+\end{tikzpicture}
+\end{document}

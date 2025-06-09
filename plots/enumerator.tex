@@ -1,0 +1,20 @@
+\documentclass{standalone}
+\usepackage{plots}
+
+\begin{document}
+\begin{tikzpicture}
+\begin{axis}[
+  width=2*\figsize,
+  height=.8*\figsize,
+  myaxis,
+  legend style={at={(.9,.5)}, anchor=west},
+  xlabel={enumeration time (s)},
+  ylabel={\# solutions},
+]
+\addplot [rustsat] table [x={rustsat},y={nsols},col sep=comma] {../data/enumerator.csv};
+\addplot [pysat] table [x={pysat},y={nsols},col sep=comma] {../data/enumerator.csv};
+\addplot [cpp] table [x={cpp},y={nsols},col sep=comma] {../data/enumerator.csv};
+\legend {\rustsat,\pysat,C++}
+\end{axis}
+\end{tikzpicture}
+\end{document}

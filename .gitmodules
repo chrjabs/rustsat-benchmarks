@@ -1,0 +1,3 @@
+[submodule "rustsat"]
+	path = rustsat
+	url = git@github.com:chrjabs/rustsat.git

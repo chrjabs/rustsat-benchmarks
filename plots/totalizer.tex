@@ -1,0 +1,20 @@
+\documentclass{standalone}
+\usepackage{plots}
+
+\begin{document}
+\begin{tikzpicture}
+\begin{axis}[
+  width=\figsize,
+  height=\figsize,
+  myaxis,
+  legend style={at={(1,0.5)}, anchor=west},
+  xlabel={enforced bound},
+  ylabel={\# generated clauses},
+]
+\addplot [rustsat] table [x={bound},y={rustsat},col sep=comma] {../data/totalizer.csv};
+\addplot [pysat] table [x={bound},y={pysat},col sep=comma] {../data/totalizer.csv};
+\addplot [openwbo] table [x={bound},y={open-wbo},col sep=comma] {../data/totalizer.csv};
+%\legend {\rustsat,\pysat,\openwbo}
+\end{axis}
+\end{tikzpicture}
+\end{document}
